@@ -14,9 +14,7 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(function(){
-      done();
-    });
+    .catch(done);
   });
 
   it('should trigger an exception when called with bad params', function(done) {
@@ -24,9 +22,7 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(function(){
-      done();
-    });
+    .catch(done);
   });
 
   it('should trigger an exception when called with invalid events but valid specs format', function(done) {
@@ -34,9 +30,7 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(function(){
-      done();
-    });
+    .catch(done);
   });
 
   it('should trigger an exception when called with valid events but invalid specs format', function(done) {
@@ -44,15 +38,11 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(function(){
-      done();
-    });
+    .catch(done);
   });
 
   it('should get true when params are valid but empty', function(done) {
     rEngine.apply([], [])
-    .then(function(){
-      done();
-    });
+    .then(done);
   });
 });
