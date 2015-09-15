@@ -1,5 +1,11 @@
 var rEngine = require('../');
 
+function doneCallback(done){
+  return function(){
+    done();
+  }
+}
+
 describe('rule engine entry point', function() {
   it('should be an object', function() {
     expect(typeof rEngine).toBe('object');
@@ -14,7 +20,7 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(done);
+    .catch(doneCallback(done));
   });
 
   it('should trigger an exception when called with bad params', function(done) {
@@ -22,7 +28,7 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(done);
+    .catch(doneCallback(done));
   });
 
   it('should trigger an exception when called with invalid events but valid specs format', function(done) {
@@ -30,7 +36,7 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(done);
+    .catch(doneCallback(done));
   });
 
   it('should trigger an exception when called with valid events but invalid specs format', function(done) {
@@ -38,11 +44,30 @@ describe('rule engine entry point', function() {
     .then(function(){
       done(new Error('It should have failed'));
     })
-    .catch(done);
+    .catch(doneCallback(done));
   });
 
-  it('should get true when params are valid but empty', function(done) {
+  it('should get false when event list is empty (default is no-match)', function(done) {
     rEngine.apply([], [])
-    .then(done);
+    .then(function(res){
+      expect(res).not.toBe(true);
+      done();
+    });
+  });
+
+  it('should match a simple equal rule', function(done) {
+    rEngine.apply([{'view': { val: 0 }}], [{'view': {val: 0, should: true}}])
+    .then(function(res){
+      expect(false).toBe(true);
+      done();
+    });
+  });
+
+  it('should reject a simple equal rule', function(done) {
+    rEngine.apply([{'view': { val: 1 }}], [{'view': {val: 0, should: true}}])
+    .then(function(res){
+      expect(res).not.toBe(true);
+      done();
+    });
   });
 });
