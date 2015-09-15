@@ -1,0 +1,26 @@
+{
+  "name": "node-rules-engine",
+  "version": "1.0.0",
+  "description": "A node.js module to check if an event array matches some specifications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dial-once/node-rules-engine.git"
+  },
+  "keywords": [
+    "node",
+    "rule",
+    "engine",
+    "condition",
+    "test"
+  ],
+  "author": "Dial Once",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/dial-once/node-rules-engine/issues"
+  },
+  "homepage": "https://github.com/dial-once/node-rules-engine#readme"
+}
