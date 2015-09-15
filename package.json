@@ -4,7 +4,8 @@
   "description": "A node.js module to check if an event array matches some specifications",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "jshint lib",
+    "test": "node_modules/jasmine-node/bin/jasmine-node tests"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/dial-once/node-rules-engine/issues"
   },
-  "homepage": "https://github.com/dial-once/node-rules-engine#readme"
+  "homepage": "https://github.com/dial-once/node-rules-engine#readme",
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
 }
