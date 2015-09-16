@@ -70,4 +70,20 @@ describe('rule engine entry point', function() {
         done();
       });
   });
+
+  it('should match when found on OR clause', function(done) {
+    rEngine.apply([{'view': { val: 1 }}], [{'view': {val: [0, 1, 2], should: true}}])
+      .then(function(res){
+        expect(res).toBe(true);
+        done();
+      });
+  });
+
+  it('should reject when not found on OR clause', function(done) {
+    rEngine.apply([{'view': { val: 1 }}], [{'view': {val: [0, 2, 3], should: true}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
+  });
 });
