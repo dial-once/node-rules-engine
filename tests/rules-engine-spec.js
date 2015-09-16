@@ -86,4 +86,20 @@ describe('rule engine entry point', function() {
         done();
       });
   });
+
+  it('should match ANY rule when key is found', function(done) {
+    rEngine.apply([{'view': { val: 1 }}], [{'view': {val: '*', should: true}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
+  });
+
+  it('should not match ANY rule when key is not found', function(done) {
+    rEngine.apply([{'click': { val: 1 }}], [{'view': {val: '*', should: true}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
+  });
 });
