@@ -17,57 +17,57 @@ describe('rule engine entry point', function() {
 
   it('should trigger an exception when called with no params', function(done) {
     rEngine.apply()
-    .then(function(){
-      done(new Error('It should have failed'));
-    })
-    .catch(doneCallback(done));
+      .then(function(){
+        done(new Error('It should have failed'));
+      })
+      .catch(doneCallback(done));
   });
 
   it('should trigger an exception when called with bad params', function(done) {
     rEngine.apply({}, {})
-    .then(function(){
-      done(new Error('It should have failed'));
-    })
-    .catch(doneCallback(done));
+      .then(function(){
+        done(new Error('It should have failed'));
+      })
+      .catch(doneCallback(done));
   });
 
   it('should trigger an exception when called with invalid events but valid specs format', function(done) {
     rEngine.apply({}, [])
-    .then(function(){
-      done(new Error('It should have failed'));
-    })
-    .catch(doneCallback(done));
+      .then(function(){
+        done(new Error('It should have failed'));
+      })
+      .catch(doneCallback(done));
   });
 
   it('should trigger an exception when called with valid events but invalid specs format', function(done) {
     rEngine.apply([], {})
-    .then(function(){
-      done(new Error('It should have failed'));
-    })
-    .catch(doneCallback(done));
+      .then(function(){
+        done(new Error('It should have failed'));
+      })
+      .catch(doneCallback(done));
   });
 
   it('should get false when event list is empty (default is no-match)', function(done) {
     rEngine.apply([], [])
-    .then(function(res){
-      expect(res).not.toBe(true);
-      done();
-    });
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
   });
 
   it('should match a simple equal rule', function(done) {
     rEngine.apply([{'view': { val: 0 }}], [{'view': {val: 0, should: true}}])
-    .then(function(res){
-      expect(false).toBe(true);
-      done();
-    });
+      .then(function(res){
+        expect(res).toBe(true);
+        done();
+      });
   });
 
   it('should reject a simple equal rule', function(done) {
     rEngine.apply([{'view': { val: 1 }}], [{'view': {val: 0, should: true}}])
-    .then(function(res){
-      expect(res).not.toBe(true);
-      done();
-    });
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
   });
 });
