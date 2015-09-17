@@ -1,6 +1,7 @@
 # node-rules-engine
 [![David](https://david-dm.org/dial-once/node-rules-engine.svg?style=flat-square)](https://david-dm.org/dial-once/node-rules-engine)
 [![Codacy](https://img.shields.io/codacy/1f7212250ea849ccb49ca273a9b4290e.svg?style=flat-square)](https://www.codacy.com/app/pukoren/node-rules-engine)
+[![Code Climate](https://img.shields.io/codeclimate/github/dial-once/node-rules-engine.svg?style=flat-square)](https://codeclimate.com/github/dial-once/node-rules-engine)
 [![Code Climate](https://img.shields.io/codeclimate/coverage/github/dial-once/node-rules-engine.svg?style=flat-square)](https://codeclimate.com/github/dial-once/node-rules-engine)
 [![Codeship](https://img.shields.io/codeship/20e197d0-3f4d-0133-ca24-22e25667a15e.svg?style=flat-square)](https://codeship.com/projects/103052)
 
