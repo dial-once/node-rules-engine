@@ -3,7 +3,7 @@ var rEngine = require('../');
 function doneCallback(done){
   return function(){
     done();
-  }
+  };
 }
 
 describe('rule engine entry point', function() {
@@ -260,10 +260,10 @@ describe('complex rule', function(){
 
   it('should throw an error for not-implemented rules', function(done){
     rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {$thing: 20}, should: false}}])
-      .then(function(res){
+      .then(function(){
         done(new Error('Should not pass through here...'));
       })
-      .catch(function(err){
+      .catch(function(){
         done();
       });
   });
