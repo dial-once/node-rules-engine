@@ -255,3 +255,47 @@ describe('rule engine complex usage', function(){
     });
   });
 });
+
+describe('complex rule', function(){
+  it('should return true when using $gt and value is actually realy $gt', function(done){
+    rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {$gt: 0}, should: true}}])
+      .then(function(res){
+        expect(res).toBe(true);
+        done();
+      });
+  });
+
+  it('should return false when using $gt and value is actually not $gt', function(done){
+    rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {$gt: 20}, should: true}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
+  });
+
+  it('should return false when using $gt and value is actually realy $gt, but should not', function(done){
+    rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {$gt: 0}, should: false}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+        done();
+      });
+  });
+
+  it('should return true when using $gt and value is not $gt, but should not', function(done){
+    rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {$gt: 20}, should: false}}])
+      .then(function(res){
+        expect(res).toBe(true);
+        done();
+      });
+  });
+
+  it('should throw an error for not-implemented rules', function(done){
+    rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {$thing: 20}, should: false}}])
+      .then(function(res){
+        done(new Error('Should not pass through here...'));
+      })
+      .catch(function(err){
+        done();
+      });
+  });
+});
