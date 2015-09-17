@@ -79,6 +79,16 @@ var rules = [
 ```
 
 # complex rules exemple
+The following rules can be used in ```val``` to compute complex rules:
+```js
+{$gt: 0} //true if event val is greater than the value
+{$lt: 0} //true if event val is lesser than the value
+{$gte: 0} //greater than or equal
+{$lte: 0} //lesser than or equal
+```
+Value can be a ```Date```, number, string, etc. Anything natively comparable in JS
+
+
 User should have made more than 10 clicks:
 ```js
 var events = [
