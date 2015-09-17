@@ -231,6 +231,18 @@ describe('rule engine complex usage', function(){
     });
   });
 
+  it('should match when events match specifications (using array of values, not every event present)', function(done){
+    rEngine.apply(usage, [
+      {'view': {val: [1,2], should: true}},
+      {'click': {val: true, should: true}},
+      {'random': {val: 30, should: true}}
+    ])
+    .then(function(res){
+      expect(res).toBe(true);
+      done();
+    });
+  });
+
   it('should match when events match specifications (using wildcard)', function(done){
     rEngine.apply(usage, [
       {'view': {val: '*', should: true}},
