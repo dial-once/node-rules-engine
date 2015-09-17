@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "jshint lib",
-    "test": "node_modules/jasmine-node/bin/jasmine-node tests"
+    "test": "node_modules/jasmine-node/bin/jasmine-node tests --verbose"
   },
   "repository": {
     "type": "git",
