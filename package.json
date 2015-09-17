@@ -1,6 +1,6 @@
 {
   "name": "rules-engine",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A node.js module to check if an event array matches some specifications. Usefull when you want to compare many rules with many events and check if the final output is true/false.",
   "main": "index.js",
   "scripts": {
