@@ -1,7 +1,7 @@
 {
   "node": true,
   "jasmine": true,
-  "curly": true,
+  "curly": false,
   "quotmark": "single",
   "maxcomplexity": 8,
   "unused": true,
