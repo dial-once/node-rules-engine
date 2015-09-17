@@ -78,3 +78,13 @@ var rules = [
 ];
 ```
 
+# complex rules exemple
+User should have made more than 10 clicks:
+```js
+var events = [
+ {'clicks': {val: 12}}
+];
+var rules = [
+  {'clicks': {val: {$gt: 10}, should: true}}
+];
+```
