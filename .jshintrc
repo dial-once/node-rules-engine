@@ -3,7 +3,6 @@
   "jasmine": true,
   "curly": false,
   "quotmark": "single",
-  "maxcomplexity": 8,
   "unused": true,
   "globals": {
     "after": true,
