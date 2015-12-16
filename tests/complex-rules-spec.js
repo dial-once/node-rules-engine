@@ -131,4 +131,35 @@ describe('complex rule', function(){
         });
     });
   });
+
+  describe('aliases', function(){
+    it('should react to lte', function(done){
+      rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {lte: 10}, should: true}}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+    it('should react to gte', function(done){
+      rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {gte: 10}, should: true}}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+    it('should react to lt', function(done){
+      rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {lt: 10}, should: true}}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+    it('should react to gt', function(done){
+      rEngine.apply([{'clicks': {val: 10}}], [{'clicks': {val: {gt: 10}, should: true}}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+  });
 });
