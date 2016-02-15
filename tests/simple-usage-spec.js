@@ -90,6 +90,14 @@ describe('rule engine usage', function() {
       });
   });
 
+  it('should not match rule when val is found and should not', function(done) {
+    rEngine.apply([{'click': { val: 1 }}], [{'view': {val: 1, should: false}}])
+      .then(function(res){
+        expect(res).toBe(true);
+        done();
+      });
+  });
+
   it('should match when found in an array of conditions', function(done) {
     rEngine.apply([{'view': { val: 1 }}], [{'view': {val: '*', should: true}},{'view': {val: '*', should: true}}])
       .then(function(res){

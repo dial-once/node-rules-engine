@@ -23,6 +23,17 @@ describe('rule engine multiple usage', function(){
     });
   });
 
+  it('should match not match contrary events (should NOT be 1 but should be anything)', function(done){
+    rEngine.apply(usage, [
+      {'view': {val: 1, should: false}},
+      {'view': {val: '*', should: true}}
+    ])
+    .then(function(res){
+      expect(res).toBe(false);
+      done();
+    });
+  });
+
   it('should match with many event matching many rules (uneven count)', function(done){
     rEngine.apply(usage, [
       {'view': {val: 1, should: true}},
