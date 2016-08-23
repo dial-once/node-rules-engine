@@ -26,6 +26,42 @@ describe('rule engine usage', function() {
       });
   });
 
+  it('should match a simple regexp rule', function(done) {
+    rEngine.apply([{'view': { val: 'abcd' }}], [{'view': {val: /abcd/, should: true}}])
+      .then(function(res){
+        expect(res).toBe(true);
+      })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should match a simple regexp rule with should:false', function(done) {
+    rEngine.apply([{'view': { val: 'abc' }}], [{'view': {val: /abcd/, should: false}}])
+      .then(function(res){
+        expect(res).toBe(true);
+      })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should reject a simple regexp rule', function(done) {
+    rEngine.apply([{'view': { val: 'abcd' }}], [{'view': {val: /dcba/, should: true}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+      })
+      .then(done)
+      .catch(done);
+  });
+
+  it('should reject a regexp rule, specified as string', function(done) {
+    rEngine.apply([{'view': { val: 'abcd' }}], [{'view': {val: '/abcd/', should: true}}])
+      .then(function(res){
+        expect(res).not.toBe(true);
+      })
+      .then(done)
+      .catch(done);
+  });
+
   it('should match when found on OR clause', function(done) {
     rEngine.apply([{'view': { val: 1 }}], [{'view': {val: [0, 1, 2], should: true}}])
       .then(function(res){
