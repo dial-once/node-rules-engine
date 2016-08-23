@@ -71,6 +71,12 @@ var rules = [
   {'page': {val: '*', should: true}}
 ];
 ```
+or
+```js
+var rules = [
+  {'page': {val: /.+/, should: true}}
+];
+```
 
 User viewed any page BUT page 3:
 ```js
