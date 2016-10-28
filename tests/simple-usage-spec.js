@@ -149,4 +149,22 @@ describe('rule engine usage', function() {
         done();
       });
   });
+
+  describe('with special characters', function() {
+    it('should match even using special chars recognized by regexp', function(done) {
+      rEngine.apply([{'view': { val: '+100' }}], [{'view': {val: '+100', should: true}},{'view': {val: '*', should: true}}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+
+    it('should not match even using special chars recognized by regexp', function(done) {
+      rEngine.apply([{'view': { val: '+100' }}], [{'view': {val: '+100', should: false}},{'view': {val: '*', should: true}}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+  });
 });
