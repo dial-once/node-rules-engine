@@ -174,4 +174,27 @@ describe('rule engine multiple usage', function(){
       done();
     });
   });
+
+  it('should match rules', function(done) {
+    rEngine.apply([ { view: { val: '577a347b-de60-469a-a0aa-ff8ae4787b5f' } },
+      { openView: { val: 'f5563525-3926-46a3-9aee-7932c6297206' } },
+      { openView: { val: '13bd1219-8d68-4756-ac45-49624d3f68c3' } },
+      { openView: { val: '4c75e2de-0c03-43ba-a7c1-03cf9085fd0a' } },
+      { openView: { val: '577a347b-de60-469a-a0aa-ff8ae4787b5f' } },
+      { '@count': { val: 5 } },
+      { '@viewCount': { val: 1 } },
+      { '@openViewCount': { val: 4 } } ],
+      [{
+        "openView" : {
+          "val" : [
+            "fa8945b5-7813-49bd-b8c3-68245dc7fac4",
+            "13bd1219-8d68-4756-ac45-49624d3f68c3"
+          ],
+          "should" : true
+        }
+      }]).then(function(res) {
+        expect(res).toBe(true);
+        done();
+      });
+  });
 });
