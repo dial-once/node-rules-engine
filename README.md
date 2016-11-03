@@ -106,3 +106,33 @@ var rules = [
   {'clicks': {val: {$gt: 10}, should: true}}
 ];
 ```
+
+
+# OR conditions and optional rules
+You can specify some rules as optional, thus if they don't match, other rules will have priority.
+
+User should do more than 10 clicks OR less than 3 pageviews:
+```js
+var events = [
+ {'clicks': {val: 12}}
+];
+var rules = [
+  {'clicks': {val: {$gt: 10}, should: true, optional: true}},
+  {'views': {val: {$lt: 3}, should: true, optional: true}}
+];
+```
+
+If none are matched, it will be rejected. If one of the two matches, its a true!
+
+You can then make some complex scenario, like:
+User should do more than 10 clicks, AND (views less than 3 pages OR make 1 comment)
+```js
+var events = [
+ {'clicks': {val: 12}}
+];
+var rules = [
+  {'clicks': {val: {$gt: 10}, should: true}},
+  {'views': {val: {$lt: 3}, should: true, optional: true }},
+  {'comments': {val: 1, should: true, optional: true }}
+];
+```
