@@ -167,4 +167,46 @@ describe('rule engine usage', function() {
         });
     });
   });
+
+  describe('with arrays', function() {
+    it('should be able to match provided values as array, spec as number', function(done) {
+      rEngine.apply([{'view': { val: [1] }}], [{'view': {val: 1, should: true }}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+
+    it('should not be able to match provided values as array, spec as number', function(done) {
+      rEngine.apply([{'view': { val: [4] }}], [{'view': {val: 1, should: true }}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+
+    it('should be able to match provided values as array, spec as array', function(done) {
+      rEngine.apply([{'view': { val: [1, 2, 3] }}], [{'view': {val: [1, 2, 3, 4], should: true }}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+
+    it('should not be able to match provided values as array, spec as array', function(done) {
+      rEngine.apply([{'view': { val: [1, 2, 3, 4] }}], [{'view': {val: [1], should: true }}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+
+    it('should not be able to match provided values as array, spec as array', function(done) {
+      rEngine.apply([{'view': { val: [4, 3] }}], [{'view': {val: [1, 2], should: true }}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+  });
 });
