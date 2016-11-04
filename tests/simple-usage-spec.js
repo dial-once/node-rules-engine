@@ -149,4 +149,64 @@ describe('rule engine usage', function() {
         done();
       });
   });
+
+  describe('with special characters', function() {
+    it('should match even using special chars recognized by regexp', function(done) {
+      rEngine.apply([{'view': { val: '+100' }}], [{'view': {val: '+100', should: true}},{'view': {val: '*', should: true}}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+
+    it('should not match even using special chars recognized by regexp', function(done) {
+      rEngine.apply([{'view': { val: '+100' }}], [{'view': {val: '+100', should: false}},{'view': {val: '*', should: true}}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+  });
+
+  describe('with arrays', function() {
+    it('should be able to match provided values as array, spec as number', function(done) {
+      rEngine.apply([{'view': { val: [1] }}], [{'view': {val: 1, should: true }}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+
+    it('should not be able to match provided values as array, spec as number', function(done) {
+      rEngine.apply([{'view': { val: [4] }}], [{'view': {val: 1, should: true }}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+
+    it('should be able to match provided values as array, spec as array', function(done) {
+      rEngine.apply([{'view': { val: [1, 2, 3] }}], [{'view': {val: [1, 2, 3, 4], should: true }}])
+        .then(function(res){
+          expect(res).toBe(true);
+          done();
+        });
+    });
+
+    it('should not be able to match provided values as array, spec as array', function(done) {
+      rEngine.apply([{'view': { val: [1, 2, 3, 4] }}], [{'view': {val: [1], should: true }}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+
+    it('should not be able to match provided values as array, spec as array', function(done) {
+      rEngine.apply([{'view': { val: [4, 3] }}], [{'view': {val: [1, 2], should: true }}])
+        .then(function(res){
+          expect(res).toBe(false);
+          done();
+        });
+    });
+  });
 });
